@@ -1,7 +1,8 @@
 const express = require("express")
 const cron = require("node-cron")
 const app = express()
-
+const cryptoModel = require("./models/index")
+const dbConnection = require("./config/db")
 
 const crypto = async function () {
   
@@ -21,12 +22,16 @@ const crypto = async function () {
   price_change_24h: item.price_change_24h
 
  }))
- console.log(finalData);
- 
+
+ cryptoModel.create(finalData).then((res)=>{
+  console.log(res); 
+ })
+
 }
 
-cron.schedule("0 */2 * * *",myFunc)
+// crypto()
+cron.schedule("0 */2 * * *",crypto)
 
-app.listen(5000,()=>{
+app.listen(5000,async()=>{
   console.log('server is running...'); 
 })
