@@ -7,8 +7,9 @@ const cryptoSchema = new Schema({
   name: String,
   price: Number,
   market_cap: Number,
-  price_change_24h: Number
-},{timeStamp:true})
+  price_change_24h: Number,
+  timeStamp: { type: Date, default: Date.now }
+})
 
 const cryptoModel = mongoose.model('crypto',cryptoSchema)
 
