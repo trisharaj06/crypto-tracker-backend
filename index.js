@@ -28,7 +28,6 @@ const crypto = async function () {
  })
 }
 
-crypto()
 cron.schedule("0 */2 * * *",crypto)
 
 // routes
