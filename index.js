@@ -17,7 +17,7 @@ const crypto = async function () {
  const filteredData = data.filter(item => ((item.id == 'bitcoin') || (item.id == 'matic-network') || (item.id == 'ethereum')))
 
  const finalData = filteredData.map(item=> ({
-  name: item.name,
+  name: item.name.toLowerCase(),
   price: item.current_price,
   market_cap: item.market_cap,
   price_change_24h: item.price_change_24h,
@@ -26,9 +26,9 @@ const crypto = async function () {
  cryptoModel.create(finalData).then((res)=>{
   console.log(res); 
  })
-
 }
 
+crypto()
 cron.schedule("0 */2 * * *",crypto)
 
 // routes
